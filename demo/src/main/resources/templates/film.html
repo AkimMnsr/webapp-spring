@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeLeaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Film section</title>
+  </head>
+  <body>
+    <header th:insert="navbar"></header>
+    <div class="containerFilm">
+      <div class="grid-container">
+        <div th:each="prod: ${films}" class="film-item">
+          <a th:href="@{/detail(id=${prod.id})}">
+            <div class="film-details">
+              <div class="film-image" data-image-url="${prod.imagePath}">
+                <img th:src="${prod.image}" alt="Nom du film" />
+              </div>
+              <div class="text-overlay">
+                <b th:text="${prod.titre}">Titre</b>
+                <p>
+                  synopsis :
+                  <i><span th:text="${prod.synopsis}">Synopsis</span></i>
+                </p>
+                <p>Année : <span th:text="${prod.annee}">Année</span></p>
+                <p>
+                  Genre : <span th:text="${prod.genre.libelle}">Genre</span>
+                </p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

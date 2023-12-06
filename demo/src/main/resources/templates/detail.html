@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header th:insert="navbar"></header>
+    <div class="detailContainer">
+      <img id="detailimg" th:src="${film.get().image}" alt="image film" />
+      <div id="detailFilm">
+        <b th:text="${film.get().titre}"></b>
+        <p th:text="Genre + ': '+ ${film.get().genre.libelle}"></p>
+        <p th:text="Année + ': ' +${film.get().annee}"></p>
+        <p th:text="Durée +': '+${film.get().duree}+ ' '+ minutes"></p>
+        <p
+          th:text="Réalisateur + ': '+ ${film.get().realisateur.nom + ' ' + film.get().realisateur.prenom}"
+        ></p>
+        <div style="display: flex">
+          Acteurs :
+          <div th:each="acteur : ${film.get().acteurs}" style="margin: 0px 5px">
+            <p th:text="${acteur.nom + ' ' + acteur.prenom}"></p>
+          </div>
+        </div>
+        <p th:text="Synopsis + ': '+ ${film.get().synopsis}"></p>
+        <div style="display: flex; justify-content: center; padding-top: 50px">
+          <a id="buttonDetail" href="/film">Retour à la liste des films </a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

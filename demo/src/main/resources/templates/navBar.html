@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeLeaf.org">
+  <head>
+    <link rel="stylesheet" href="/style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width= , initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header th:fragment="header" class="navBar">
+      <div style="display: flex; gap: 15px; align-items: center">
+        <a style="padding-bottom: 3px" href="/accueil">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/799px-Netflix_2015_logo.svg.png"
+            alt="dynsei+"
+            style="width: 25%"
+          />
+        </a>
+      </div>
+      <div class="iconContainer">
+        <a href="/accueil">Accueil</a>
+        <a href="/film">Films</a>
+        <a href="/addFilm">Ajouter un film</a>
+        <a href="/profil">Profil</a>
+      </div>
+    </header>
+  </body>
+</html>

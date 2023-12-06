@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeLeaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Ajouter un film</title>
+  </head>
+  <body>
+    <header th:insert="navbar"></header>
+
+    <div id="addFilmContainer">
+      <fieldset>
+        <h3>Ajouter un film</h3>
+        <form
+          id="addFilmForm"
+          action="/film"
+          th:object="${film}"
+          method="post"
+          style="display: flex; flex-direction: column"
+        >
+          <label for="idTitre">Titre du film : </label>
+          <input
+            placeholder="Titre"
+            required
+            id="idTitre"
+            type="text"
+            th:field="*{titre}"
+          />
+          <p
+            th:if="${#fields.hasErrors('titre')}"
+            th:errors="*{titre}"
+            class="error-message"
+          ></p>
+          <label for="idSynopsis">synopsis : </label>
+          <textarea
+            id="idSynopsis"
+            required
+            rows="4"
+            cols="7"
+            th:field="*{synopsis}"
+          ></textarea>
+          <p
+            th:if="${#fields.hasErrors('synopsis')}"
+            th:errors="*{synopsis}"
+            class="error-message"
+          ></p>
+          <label for="idAnnee">Année du film : </label>
+          <input
+            min="1900"
+            max="2023"
+            step="1"
+            required
+            id="idAnnee"
+            type="number"
+            th:field="*{annee}"
+          />
+          <p
+            th:if="${#fields.hasErrors('annee')}"
+            th:errors="*{annee}"
+            class="error-message"
+          ></p>
+          <label for="idDuree">Durée du film (minutes) : </label>
+          <input required id="idDuree" type="number" th:field="*{duree}" />
+          <p
+            th:if="${#fields.hasErrors('duree')}"
+            th:errors="*{duree}"
+            class="error-message"
+          ></p>
+          <label for="idGenre">Genre : </label>
+          <select id="idGenre" th:field="*{genre}" required>
+            <option
+              th:each="gen: ${@genres}"
+              th:value="${gen.id}"
+              th:text="${gen.libelle}"
+            ></option>
+          </select>
+          <label for="idImage">Couverture du film (url)</label>
+          <input required type="text" th:field="*{image}" />
+          <label for="idReal">Realisateur: </label>
+          <select id="idGenre" th:field="*{realisateur}" required>
+            <option
+              th:each="realisateur: ${@participants}"
+              th:if="${realisateur.isReal}"
+              th:value="${realisateur.id}"
+              th:text="${realisateur.nom + ' ' + realisateur.prenom}"
+            ></option>
+          </select>
+
+          <label for="idReal">Acteurs: </label>
+          <select id="idReal" th:field="*{acteurs}" multiple>
+            <option
+              th:each="acteur: ${@participants}"
+              th:if="${!acteur.isReal}"
+              th:value="${acteur.id}"
+              th:text="${acteur.nom + ' ' + acteur.prenom}"
+            ></option>
+          </select>
+          <p
+            th:if="${#fields.hasErrors('acteurs')}"
+            th:errors="*{acteurs}"
+            class="error-message"
+          ></p>
+
+          <div id="containerSubmitAddFilm">
+            <input id="submitAddFilm" type="submit" value="Ajouter le film" />
+          </div>
+        </form>
+      </fieldset>
+    </div>
+  </body>
+</html>
